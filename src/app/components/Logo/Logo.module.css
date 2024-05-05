@@ -1,0 +1,40 @@
+.logoContainer{
+    display: flex;
+    align-items: center;
+}
+
+.logoContainer > img{
+    max-height: 63px;
+    max-width: 63px;
+    height: auto;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.logoContainer > h1{
+    font-size: 40px;
+    font-weight: 600;
+    color: #2b8806;
+}
+
+@media screen and (max-width: 700px){
+    .logoContainer{
+        width: 100vw;
+        height: 48px;
+        justify-content: flex-start;
+        background-color: #2b8806;
+        padding-left: 10px;
+    }
+
+    .logoContainer > img{
+        max-height: 32px;
+        max-width: 32px;
+    }
+    
+    .logoContainer > h1{
+        font-size: 18px;
+        font-weight: 500;
+        color: #ffffff;
+    }
+}
