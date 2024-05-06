@@ -1,10 +1,3 @@
-const API_KEY = process.env.CASHFREE_API_KEY;
-const API_SECRET = process.env.CASHFREE_API_SECRET;
-const BASE_URL = process.env.CASHREE_BASE_URL
-
-// const API_KEY = 'TEST10185075923661f4c6b3ce9906cc57058101'
-// const API_SECRET = 'fjiwetu3489nx28&*9jkghDJK905jgkf03598jkd'
-// const BASE_URL = 'https://api.cashfree.com'
 
 import axios from "axios"
 import { load } from '@cashfreepayments/cashfree-js'
@@ -17,7 +10,7 @@ import { globalContext } from "@/Context API/ContextProvider";
 function PaymentButton({ checkoutData }) {
     const router = useRouter()
 
-    const { cartData, userData, setLoading, setCartData } = useContext(globalContext);
+    const { userData, setLoading, setCartData } = useContext(globalContext);
 
     let initializeSDK = async function () {
         const cashfree = await load({

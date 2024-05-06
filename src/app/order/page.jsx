@@ -2,8 +2,6 @@
 
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import Style from './Checkout.module.css'
-import { toast } from 'react-toastify'
-import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { globalContext } from '@/Context API/ContextProvider'
 import Header from '../components/Header/Header'
