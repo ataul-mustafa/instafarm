@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Instafarm: Agriculture Product Ecommerce Website
 
-## Getting Started
+Instafarm is a feature-rich agriculture product ecommerce website developed on Next.js 14. This README file provides instructions on how to set up the project in your localhost.
 
-First, run the development server:
+Setup Instructions
 
-```bash
+Clone the Repository
+git clone https://github.com/ataul-mustafa/instafarm.git
+
+Install DependenciesNavigate to the project directory and install the required dependencies using npm or yarn:
+cd instafarm
+npm install
+
+Set Up Environment VariablesCreate a .env file in the root directory of the project and add the following environment variables:
+
+DB_URL=             // MongoDB connection URL
+JWT_SECRET_KEY=     // Secret key for JWT token
+CASHFREE_CLIENT_ID= // Cashfree Client ID
+CASHFREE_API_SECRET=// Cashfree API Secret
+
+
+Start the Development ServerRun the following command to start the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This will start the Next.js development server on http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Project Structure
+/src/app/api: Contains api.
+/src/app/components: Contains reusable React components.
+/src/app/route*: contain all client route
+/src/Context API: Contains Context API
+/src/Images: contains Images
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Technologies Used
+Next.js: Frontend framework for server-rendered React applications.
+React: JavaScript library for building user interfaces.
+MongoDB: NoSQL database for storing product and user data.
+Express.js: Backend framework for handling API requests.
+JWT: JSON Web Tokens for user authentication.
+bcypt: for encrypting the password
+Cashfree : Payment gateway for processing payments.
