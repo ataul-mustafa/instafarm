@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from 'react'
-import Style from './auth.module.css';
+import Style from '../sign-up/auth.module.css';
 import { globalContext } from '@/Context API/ContextProvider';
 import { toast } from 'react-toastify';
 import axios from 'axios'
 import { useRouter } from "next/navigation";
-import Link from 'next/link';
+import Header from '../components/Header/Header';
+import MobileNavBar from '../components/MobileComp/MobileNavBar';
 import Footer from '../components/Footer/Footer';
 
 const page = () => {
@@ -14,19 +15,17 @@ const page = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        password: '',
     })
     const [errors, setErrors] = useState({
         nameError: '',
         emailError: '',
-        passwordError: '',
     })
-    const { setLoading, setIsAuthenticated } = useContext(globalContext)
+    const { setLoading, setUserData } = useContext(globalContext)
 
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
-        if (token) {
-            router.push('/')
+        if (!token) {
+            router.push('/sign-in')
         }
     }, [])
 
@@ -35,7 +34,6 @@ const page = () => {
         const err = {
             nameError: '',
             emailError: '',
-            passwordError: '',
         }
         let validated = false;
 
@@ -51,18 +49,12 @@ const page = () => {
             err.emailError = "Enter a valid email";
         }
 
-        if (!formData.password) {
-            err.passwordError = "Password is required";
-        } else if ((formData.password).length < 6) {
-            err.passwordError = "Password must contains min. 6 characters"
-        }
 
-        if (!err.nameError && !err.phoneError && !err.emailError && !err.passwordError) {
+        if (!err.nameError && !err.phoneError && !err.emailError) {
             validated = true;
             setErrors({
                 nameError: '',
                 emailError: '',
-                passwordError: '',
             })
         } else {
             setErrors(err)
@@ -84,12 +76,17 @@ const page = () => {
         setLoading(true)
         if (validateFormData()) {
             try {
-                const { data } = await axios.post('/api/user/signup', formData);
+                const { data } = await axios.post('/api/user/update-profile', formData, {
+                    headers: {
+                        authorization: localStorage.getItem('jwtToken')
+                    }
+                });
                 localStorage.setItem('jwtToken', data.jwtToken)
-                setIsAuthenticated(true)
+                setUserData(data.user)
                 toast.success(data.message);
-                 router.push('/')
+                router.push('/profile')
             } catch (error) {
+                console.log(error)
                 toast.error(error.response.data.error);
             }
         }
@@ -98,15 +95,13 @@ const page = () => {
 
     return (
         <>
+            <Header />
             <div className={Style.authContainer}>
-                <div className={Style.logo}>
-                    {/* <Logo /> */}
-                </div>
                 <h1>Welcome</h1>
                 <form onSubmit={onSubmitFun}>
-                    <h1>Create Account <span>Don’t have an account?</span></h1>
+                    <h1>Update User Info</h1>
                     <div>
-                        <label htmlFor="name">Your name</label>
+                        <label htmlFor="name">New name</label>
                         <input id='name' type="text"
                             name='name'
                             onChange={onInputChange}
@@ -119,7 +114,7 @@ const page = () => {
                         }
                     </div>
                     <div>
-                        <label htmlFor="email">Email id</label>
+                        <label htmlFor="email">New Email id</label>
                         <input id='email' type="text"
                             name='email'
                             onChange={onInputChange}
@@ -131,26 +126,11 @@ const page = () => {
                             errors.emailError && <p>{errors.emailError}</p>
                         }
                     </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input id='password' type="password"
-                            name='password'
-                            onChange={onInputChange}
-                            className={errors.passwordError ? Style.redBorder : ''}
-                        />
-                    </div>
-                    <div className={Style.error}>
-                        {
-                            errors.passwordError && <p>{errors.passwordError}</p>
-                        }
-                    </div>
-                    <button>Continue</button>
+                    <button>Update</button>
                 </form>
-                <div className={Style.link}>
-                    Already have an account? <Link href={'/sign-in'}> Sign in</Link>
-                </div>
                 <Footer />
             </div>
+            <MobileNavBar />
         </>
     )
 }

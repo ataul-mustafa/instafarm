@@ -5,12 +5,12 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Style from './Cart.module.css'
 import { PiBag } from "react-icons/pi";
-// import Footer from '../Footer/Footer';
 import { useRouter } from 'next/navigation';
 import { globalContext } from '@/Context API/ContextProvider';
 import Header from '../components/Header/Header';
 import BackButton from '../components/BackButton/BackButton';
 import MobileNavBar from '../components/MobileComp/MobileNavBar';
+import Footer from '../components/Footer/Footer';
 
 const page = () => {
   const router = useRouter()
@@ -90,7 +90,7 @@ const page = () => {
                           </div>
                           <div><h1>Price</h1><h1>₹{data.product.price}</h1></div>
                           <div>
-                            <label htmlFor="quantity">Quantity</label>
+                            <label htmlFor="quantity">Kg</label>
                             <select name="quantity" id="quantity" value={data.quantity} onChange={(e) => { changeQuanFun(e.target.value, data.product._id) }}>
                               <option value="1">1</option>
                               <option value="2">2</option>
@@ -123,7 +123,7 @@ const page = () => {
                   <h2><span>Convenience Fee</span><span>₹45</span></h2>
                   <div>
                     <h2><span>Total Amount</span><span>₹{cartTotalPrice + 45}</span></h2>
-                    <button onClick={() => { navigate('/checkout') }}>PLACE ORDER</button>
+                    <button onClick={() => { router.push('/order') }}>PLACE ORDER</button>
                   </div>
                 </div>
               </div>
@@ -131,7 +131,7 @@ const page = () => {
           </div> :
           <h1 className={'noProduct'}>No product in the cart</h1>
       }
-      {/* <div className='footer'><Footer /></div> */}
+      <div className='footer'><Footer /></div>
       <MobileNavBar />
     </>
   )

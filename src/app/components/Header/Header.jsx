@@ -39,7 +39,7 @@ const Header = () => {
     }, [cartData])
 
     useEffect(() => {
-        if (userData.name) {
+        if (userData?.name) {
             setName(getFirstLetters(userData.name));
         }
     }, [userData])
@@ -85,7 +85,10 @@ const Header = () => {
                             <Link href={'/products'}>Products</Link>
                             {
                                 isAuthenticated &&
-                                <Link href={'/invoice'}>Invoice</Link>
+                                <>
+                                <Link href={'/invoices'}>Invoice</Link>
+                                <Link href={'/profile'}>Profile</Link>
+                                </>
                             }
                         </div>
                     </div>
@@ -101,7 +104,8 @@ const Header = () => {
                                 >
                                     {
                                         close => (<div className={Style.profileInfo}>
-                                            <h1>{userData.name}</h1>
+                                            <h1>{userData?.name}</h1>
+                                            <button onClick={() => { router.push('/profile') }}>Profile</button>
                                             <button onClick={() => { logoutHandler(close) }}>Logout</button>
                                         </div>)
                                     }
@@ -124,7 +128,7 @@ const Header = () => {
 
             <div className={Style.mobileHeaderWrapper}>
                 <div className={Style.mobileHeader}>
-                    <input type="text" onChange={onSearchChange} onClick={inputClickHandler} placeholder='Search Musicart' />
+                    <input type="text" onChange={onSearchChange} onClick={inputClickHandler} placeholder='Search Instafarm' />
                     <FaSearch />
                 </div>
             </div>

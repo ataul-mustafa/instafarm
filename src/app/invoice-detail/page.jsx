@@ -2,13 +2,13 @@
 
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import Style from '../order/Checkout.module.css'
-// import Footer from '../Footer/Footer'
 import Header from '../components/Header/Header'
 import { globalContext } from '@/Context API/ContextProvider'
 import BackButton from '../components/BackButton/BackButton'
 import MobileNavBar from '../components/MobileComp/MobileNavBar'
+import Footer from '../components/Footer/Footer'
 
-const InvoiceDetail = () => {
+const page = () => {
     const { invoiceDetail } = useContext(globalContext);
     const [curProduct, setCurProduct] = useState({ ...invoiceDetail?.products[0]?.product })
 
@@ -24,8 +24,8 @@ const InvoiceDetail = () => {
 
   return (
     <>
-      <Header pathName={'Home/ invoice'} />
-      <BackButton path={'/invoice'} text={'Back to Invoices'} />
+      <Header />
+      <BackButton path={'/invoices'} text={'Back to Invoices'} />
       <div className={Style.checkoutContainer}> 
         <h1>Invoice</h1>
         <div>
@@ -40,14 +40,7 @@ const InvoiceDetail = () => {
             <div>
               <h2>2. Payment method</h2>
               <div>
-                <select
-                  value={invoiceDetail?.paymentMethod}
-                  name="paymentMethod" id="" readOnly>
-                  <option value="">Payment method</option>
-                  <option value="Pay on Delivery">Pay on Delivery</option>
-                  <option value="UPI">UPI</option>
-                  <option value="Card">Card</option>
-                </select>
+                <input type="phone" value={invoiceDetail?.phone} readOnly />
               </div>
             </div>
             <div>
@@ -61,8 +54,9 @@ const InvoiceDetail = () => {
                   }
                 </div>
                 <h1>{(curProduct.name).split(',')[0]}</h1>
-                <p>colour: {curProduct.color}</p>
+                <p>category: {curProduct.category}</p>
                 <h2>Estimated delivery : Monday — FREE Standard Delivery</h2>
+                <h2>Pre-paid</h2>
               </div>
             </div>
           </div>
@@ -80,4 +74,4 @@ const InvoiceDetail = () => {
   )
 }
 
-export default InvoiceDetail
+export default page

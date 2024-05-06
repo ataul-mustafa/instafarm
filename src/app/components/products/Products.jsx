@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Style from '../FeaturedProducts/Products.module.css';
-// import Footer from '../Footer/Footer';
+import Footer from '../Footer/Footer';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import Pagination from 'react-js-pagination';
@@ -12,7 +12,7 @@ import Link from 'next/link';
 import SkelatonLoader from '../Loaders/SkelatonLoader';
 
 const Products = () => {
-  const { products, setLoading, productLoader, setCartData, prodViewMode } = useContext(globalContext);
+  const { products, setLoading, productLoader, setCartData, prodViewMode, setSelectedNav } = useContext(globalContext);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPrds, setCurrentPrds] = useState(products); 
@@ -54,6 +54,7 @@ const Products = () => {
     }else{
       setCurrentPrds(products)
     }
+    setSelectedNav('products')
   }, [currentPage, products])
 
 
@@ -89,7 +90,7 @@ const Products = () => {
                       </div>
                       <div>
                         <h1>{(product.name).split(',')[0]}</h1>
-                        <h3>Price - ₹ {product.price}</h3>
+                        <h3>Price - ₹ {product.price}/kg</h3>
                         <h2>{`${product.category} | ${product.availability}`}</h2>
                         <h2>{product.name}</h2>
                         <Link href={`ProductDetail/${product._id}`}>
@@ -122,7 +123,7 @@ const Products = () => {
               />
             </div>
           )}
-          {/* <Footer /> */}
+          <Footer />
         </>
       ) : (
         <SkelatonLoader />

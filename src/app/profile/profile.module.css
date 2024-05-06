@@ -1,0 +1,60 @@
+.profileCont{
+    width: 90vw;
+    margin: auto;
+}
+
+.profileCont > div:nth-child(1){
+    width: 100px;
+    height: 100px;
+    border: 2px solid green;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileCont > div:nth-child(1) > h1{
+    text-align: center;
+}
+
+.profileCont > .profileInfo{
+    margin-top: 50px;
+}
+
+.profileCont > .profileInfo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profileCont > .profileInfo > div > div{
+    margin-top: 20px;
+}
+
+.profileCont > .profileInfo > div > div > label{
+    color: rgb(126, 121, 121);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.profileCont > .profileInfo > div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+}
+
+.profileCont > .profileInfo > div:nth-child(2) > a{
+    font-size: 20px;
+    font-weight: 600;
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: green;
+    color: #fff;
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.profileCont > .profileInfo > div:nth-child(2) > a:hover{
+    background-color: rgb(3, 81, 3);
+}

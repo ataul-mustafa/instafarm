@@ -53,7 +53,7 @@
     font-weight: 400;
 }
 
-.checkoutContainer > div > .left > div:nth-child(2) > div > select{
+.checkoutContainer > div > .left > div:nth-child(2) > div > input{
     width: 380px;
     font-weight: 400;
     font-size: 18px;
@@ -193,6 +193,10 @@
     padding: 10px 0;
     margin: 10px 0;
     border-top: 1px solid #E1E1E1;
+}
+
+.checkoutContainer > div > .left > div:nth-child(3) > div > div >.greenBorder{
+    border: 4px solid rgb(255, 255, 255);
 }
 
 @media screen and (max-width: 700px) {

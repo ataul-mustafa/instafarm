@@ -9,7 +9,7 @@ const orderSchema = new mongoose.Schema({
         name: String,
         address: String,
     },
-    paymentMethod: {
+    phone: {
         type: String,
         required: true,
     },
@@ -29,5 +29,5 @@ const orderSchema = new mongoose.Schema({
     }
 })
 
-const Order = mongoose.model('Order', orderSchema);
+const Order = mongoose.models.Order || mongoose.model('Order', orderSchema);
 module.exports = Order;

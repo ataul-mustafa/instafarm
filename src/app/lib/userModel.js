@@ -28,7 +28,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minLength: [6, "Password must contain atleast 6 characters"]
-    }
+    },
+    userType: {
+        type: String,
+        enum: ["user", "admin"],
+    },
 })
 
 const User = mongoose.models.user || mongoose.model('user', userSchema);

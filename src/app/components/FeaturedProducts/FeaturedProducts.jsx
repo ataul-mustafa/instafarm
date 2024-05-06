@@ -50,7 +50,7 @@ const FeaturedProducts = () => {
                           <MdAddShoppingCart onClick={() => { addToCart(product) }} className={Style.cartIcon} />
                         </div>
                         <h2>{(product.name).split(',')[0]}</h2>
-                        <h3>Price - ₹ {product.price}</h3>
+                        <h3>Price - ₹ {product.price}/kg</h3>
                         <h3>{`${product.category} | ${product.availability}`}</h3>
                       </Link>
                     ))}
@@ -60,7 +60,6 @@ const FeaturedProducts = () => {
           ) : (
             <div className={Style.noProducts}>No products found</div>
           )}
-          {/* <Footer /> */}
         </>
       ) : (
         <SkelatonLoader />

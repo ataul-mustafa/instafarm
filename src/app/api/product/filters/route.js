@@ -10,8 +10,7 @@ export async function GET(req) {
         await dbCon();
 
         const { searchParams } = new URL(req.url);
-        const name = searchParams.get("name");
-        console.log(name)
+
         const sortBy = searchParams.get("sortBy");
         let sortCriteria = {};
         if (sortBy) {

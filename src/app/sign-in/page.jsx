@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios'
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
+import Footer from '../components/Footer/Footer';
 
 const page = () => {
     const router = useRouter();
@@ -78,7 +79,6 @@ const page = () => {
         if (validateFormData()) {
               try {
                 const {data} = await axios.post('/api/user/login', {...formData, email: formData.phoneEmail});
-                console.log(data);
                 localStorage.setItem('jwtToken', data.jwtToken)
                 setIsAuthenticated(true)
                 toast.success(data.message);
@@ -130,7 +130,7 @@ const page = () => {
                 New to Instafarm?
             </div>
             <Link href={'/sign-up'}>Create your Instafarm account</Link>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     )
 }

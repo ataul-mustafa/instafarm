@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useContext, useEffect, useMemo, useState } from 'react'
-import Style from './Checkout.module.css'
-// import Footer from '../Footer/Footer'
+import Style from './invoice.module.css'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import Header from '../components/Header/Header'
@@ -10,6 +9,9 @@ import Link from 'next/link'
 import { globalContext } from '@/Context API/ContextProvider'
 import BackButton from '../components/BackButton/BackButton'
 import MobileNavBar from '../components/MobileComp/MobileNavBar'
+import { RiFileEditFill } from "react-icons/ri";
+import Footer from '../components/Footer/Footer';
+
 
 const page = () => {
 
@@ -19,7 +21,7 @@ const page = () => {
     const getInvoiceData = async () => {
         setLoading(true)
         try {
-            const { data } = await axios.get('https://musicart-backend-c8rh.onrender.com/api/invoice/get', {
+            const { data } = await axios.get('/api/order', {
                 headers: {
                     Authorization: localStorage.getItem('jwtToken')
                 }

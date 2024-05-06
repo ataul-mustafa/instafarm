@@ -1,11 +1,12 @@
 const { headers } = require("next/headers");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { NextResponse } = require("next/server");
 
 
 const userAuth = (req) =>{
     const token = headers().get('authorization')
     if (!token) {
-        return NextResponse.json({ error: "Please login to access this page" }, { status: 400 });
+        return NextResponse.json({ message: "Please login to access this page" }, { status: 400 });
     }
 
     let data = undefined;

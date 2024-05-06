@@ -6,17 +6,15 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Style from './ProductDetails.module.css';
 import { toast } from 'react-toastify';
-// import Footer from '../Footer/Footer';
 import { useRouter } from 'next/navigation';
 import Header from '../../components/Header/Header';
 import BackButton from '../../components/BackButton/BackButton';
 import { globalContext } from '@/Context API/ContextProvider';
 import MobileNavBar from '../../components/MobileComp/MobileNavBar';
+import Footer from '@/app/components/Footer/Footer';
 
 const ProductDetails = (props) => {
     const id = props.params.id;
-    // const router = useRouter();
-    // const { id } = router.query;
     const router = useRouter();
 
     const { setLoading, setCartData } = useContext(globalContext)
@@ -97,7 +95,7 @@ const ProductDetails = (props) => {
                     <div className={Style.desc}>
                         <h1>{(product?.name)?.split(',')[0]}</h1>
                         <h2 className={Style.prdName}>{product.name}</h2>
-                        <h2>Price - ₹ {product.price}</h2>
+                        <h2>Price - ₹ {product.price}/kg</h2>
                         <h3>Category: {product.category}</h3>
                         <ul>
                             <p>About this item</p>
@@ -109,11 +107,11 @@ const ProductDetails = (props) => {
                         </ul>
                         <h4>Available - <span>{product.availability}</span></h4>
                         <button onClick={addToCart} className={Style.btn1}>Add to cart</button>
-                        <button onClick={()=>{navigate('/cart')}} className={Style.btn2}>Buy Now</button>
+                        <button onClick={()=>{router.push('/cart')}} className={Style.btn2}>Buy Now</button>
                     </div>
                 </div>
             </div>
-            {/* <div className='footer'><Footer /></div> */}
+            <div className='footer'><Footer /></div>
             <MobileNavBar />
         </div>
     )
