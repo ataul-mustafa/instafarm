@@ -1,26 +1,26 @@
 "use client"
 
-import React, { useContext, useEffect, useMemo, useState } from 'react';
-import Style from './Checkout.module.css';
-import { useRouter } from 'next/navigation';
-import { globalContext } from '@/Context API/ContextProvider';
-import Header from '../components/Header/Header';
-import BackButton from '../components/BackButton/BackButton';
-import MobileNavBar from '../components/MobileComp/MobileNavBar';
-import PaymentButton from '../components/PaymentButton/PaymentButton';
-import Footer from '../components/Footer/Footer';
+import React, { useContext, useEffect, useMemo, useState } from 'react'
+import Style from './Checkout.module.css'
+import { useRouter } from 'next/navigation'
+import { globalContext } from '@/Context API/ContextProvider'
+import Header from '../components/Header/Header'
+import BackButton from '../components/BackButton/BackButton'
+import MobileNavBar from '../components/MobileComp/MobileNavBar'
+import PaymentButton from '../components/PaymentButton/PaymentButton'
+import Footer from '../components/Footer/Footer'
 
 const Page = () => {
   const router = useRouter();
   const { cartData, userData, setLoading, setCartData } = useContext(globalContext);
-  const [curProduct, setCurProduct] = useState(cartData[0]?.product ? { ...cartData[0].product } : {});
+  const [curProduct, setCurProduct] = useState(cartData[0]?.product || {})
   const [checkoutData, setCheckoutData] = useState({
     deliveryAdd: '',
     phone: '',
     products: [],
     totalPrice: '',
     totalAmount: ''
-  });
+  })
 
   const cartTotalPrice = useMemo(() => {
     let value = 0;
@@ -29,12 +29,17 @@ const Page = () => {
         value += element.totalPrice;
       }
     });
-    return value;
-  }, [cartData]);
+    return value
+  }, [cartData])
 
   useEffect(() => {
-    setCheckoutData({ ...checkoutData, products: cartData, totalPrice: cartTotalPrice, totalAmount: cartTotalPrice + 45 });
-  }, [cartData, cartTotalPrice]);
+    setCheckoutData({
+      ...checkoutData,
+      products: cartData,
+      totalPrice: cartTotalPrice,
+      totalAmount: cartTotalPrice + 45
+    })
+  }, [cartData, cartTotalPrice])
 
   return (
     <>
@@ -49,14 +54,14 @@ const Page = () => {
               <div>
                 <p>{userData?.name}</p>
                 <textarea
-                  onChange={(e) => { setCheckoutData({ ...checkoutData, deliveryAdd: e.target.value }) }}></textarea>
+                  onChange={(e) => setCheckoutData({ ...checkoutData, deliveryAdd: e.target.value })}></textarea>
               </div>
             </div>
             <div>
-              <h2>2. Mobile No.</h2>
+              <h2>2.Mobile No.</h2>
               <div>
                 <input type="phone"
-                  onChange={(e) => { setCheckoutData({ ...checkoutData, phone: e.target.value }) }}
+                  onChange={(e) => setCheckoutData({ ...checkoutData, phone: e.target.value })}
                   placeholder='Enter your phone no' />
               </div>
             </div>
@@ -67,15 +72,15 @@ const Page = () => {
                   {
                     cartData.map((data, i) => (
                       <img key={i}
-                        src={data.product.images[0]}
-                        onClick={() => { setCurProduct(data.product) }}
-                        alt={(data.product.name?.split(',')[0] || 'Product')} />
+                        src={data.product?.images?.[0]}
+                        onClick={() => setCurProduct(data.product)}
+                        alt={data.product?.name?.split(',')[0]} />
                     ))
                   }
                 </div>
-                <h1>{(curProduct.name?.split(',')[0] || 'Product')}</h1>
-                <p>Category: {curProduct.category || 'N/A'}</p>
-                <p>{curProduct.availability || 'N/A'}</p>
+                <h1>{curProduct?.name?.split(',')[0]}</h1>
+                <p>Category: {curProduct?.category}</p>
+                <p>{curProduct?.availability}</p>
                 <h2>Estimated delivery : Monday — FREE Standard Delivery</h2>
               </div>
             </div>
@@ -98,7 +103,7 @@ const Page = () => {
       <div className='footer'><Footer /></div>
       <MobileNavBar />
     </>
-  );
+  )
 }
 
-export default Page;
+export default Page
