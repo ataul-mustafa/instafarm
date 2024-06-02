@@ -31,7 +31,7 @@ export async function POST(req){
             _id: new mongoose.Types.ObjectId(),
             name,
             email,
-            userType,
+            userType: "user",
             password: hashedPassword,
         })
         
