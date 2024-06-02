@@ -9,18 +9,18 @@ import MobileNavBar from '../components/MobileComp/MobileNavBar'
 import Footer from '../components/Footer/Footer'
 
 const page = () => {
-    const { invoiceDetail } = useContext(globalContext);
-    const [curProduct, setCurProduct] = useState({ ...invoiceDetail?.products[0]?.product })
+  const { invoiceDetail } = useContext(globalContext);
+  const [curProduct, setCurProduct] = useState(invoiceDetail?.products[0]?.product ? { ...invoiceDetail.products[0].product } : {});
 
-    const cartTotalPrice = useMemo(() => {
-        let value = 0;
-        invoiceDetail?.products?.forEach(element => {
-          if (element.totalPrice) {
-            value += element.totalPrice;
-          }
-        });
-        return value
-      }, [invoiceDetail])
+  const cartTotalPrice = useMemo(() => {
+    let value = 0;
+    invoiceDetail?.products?.forEach(element => {
+      if (element.totalPrice) {
+        value += element.totalPrice;
+      }
+    });
+    return value;
+  }, [invoiceDetail]);
 
   return (
     <>
