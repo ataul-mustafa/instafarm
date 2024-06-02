@@ -8,9 +8,9 @@ import BackButton from '../components/BackButton/BackButton'
 import MobileNavBar from '../components/MobileComp/MobileNavBar'
 import Footer from '../components/Footer/Footer'
 
-const page = () => {
+const Page = () => {
   const { invoiceDetail } = useContext(globalContext);
-  const [curProduct, setCurProduct] = useState(invoiceDetail?.products[0]?.product ? { ...invoiceDetail.products[0].product } : {});
+  const [curProduct, setCurProduct] = useState(invoiceDetail?.products?.[0]?.product || {})
 
   const cartTotalPrice = useMemo(() => {
     let value = 0;
@@ -19,8 +19,8 @@ const page = () => {
         value += element.totalPrice;
       }
     });
-    return value;
-  }, [invoiceDetail]);
+    return value
+  }, [invoiceDetail])
 
   return (
     <>
@@ -49,12 +49,15 @@ const page = () => {
                 <div>
                   {
                     invoiceDetail?.products?.map((data, i) => (
-                      <img key={i} src={data.product.images[0]} onClick={() => { setCurProduct(data.product) }} alt={(data.product.name).split(',')[0]} />
+                      <img key={i}
+                        src={data.product?.images?.[0]}
+                        onClick={() => setCurProduct(data.product)}
+                        alt={data.product?.name?.split(',')[0]} />
                     ))
                   }
                 </div>
-                <h1>{(curProduct.name).split(',')[0]}</h1>
-                <p>category: {curProduct.category}</p>
+                <h1>{curProduct?.name?.split(',')[0]}</h1>
+                <p>Category: {curProduct?.category}</p>
                 <h2>Estimated delivery : Monday — FREE Standard Delivery</h2>
                 <h2>Pre-paid</h2>
               </div>
@@ -74,4 +77,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
